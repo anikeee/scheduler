@@ -1,0 +1,81 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* Timeblocks */
+.timeblock {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  position: relative;
+}
+
+/* Time */
+.hour {
+  font-size: 18px;
+  font-weight: bold;
+  min-width: 80px;
+  padding: 10px;
+  text-align: center;
+  border-right: 1px solid #ccc;
+}
+
+/* Description */
+.description {
+  background-color: #fff;
+  border: none;
+  padding: 10px;
+  resize: none;
+  width: 100%;
+}
+
+/* Save button */
+.saveBtn {
+  background-color: #06aed5;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.saveBtn i {
+  font-size: 18px;
+  margin: 0;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Past */
+.past .description {
+  background-color: #d3d3d3;
+}
+
+/* Present */
+.present .description {
+  background-color: #ff6961;
+}
+
+/* Future */
+.future .description {
+  background-color: #77dd77;
+}
+
+/* Current Day */
+#currentDay {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
