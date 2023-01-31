@@ -44,12 +44,8 @@ function createTimeblocks() {
     }
 
     // Color code timeblocks based on past, present, and future
-    const now = new Date().get
-
-
-    // Color code timeblocks based on past, present, and future
     const now = new Date().getHours();
-    $(".timeblock").each(function() {
+    $(".timeblock").each(function () {
         const hour = parseInt($(this).find(".hour").text().split(":")[0]);
         if (hour < now) {
             $(this).addClass("past");
@@ -61,10 +57,12 @@ function createTimeblocks() {
     });
 
 // Save event to local storage when save button is clicked
-    $(".saveBtn").on("click", function() {
+    $(".saveBtn").on("click", function () {
         const hour = $(this).siblings(".hour").text().split(':')[0];
         const event = $(this).siblings(".description").val();
         const date = selectedDate.format("YYYY-MM-DD");
         savedEvents[hour] = {event: event, date: date};
-    localStorage.setItem("savedEvents", JSON.stringify(savedEvents));
-});
+        localStorage.setItem("savedEvents", JSON.stringify(savedEvents));
+    });
+
+}
