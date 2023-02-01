@@ -1,25 +1,44 @@
-// File name: script.js
+// Get current day and display it on the page
+let currentDay = document.getElementById("currentDay");
+let today = new Date();
+let day = today.getDay();
+let daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+currentDay.textContent = daysOfWeek[day] + ", " + today.toLocaleDateString();
 
-const container = $(".container");
-const currentDay = $("#currentDay");
+// Get all timeblocks and set the colors based on past, present, and future
+let timeblocks = document.querySelectorAll(".timeblock");
+let hour = new Date().getHours();
 
-const businessHours = [9, 10, 11, 12, 13, 14, 15, 16, 17];
+timeblocks.forEach(timeblock => {
+    let timeblockHour = parseInt(timeblock.getAttribute("data-hour"));
+    let description = timeblock.querySelector(".description");
 
-// Display current day
-currentDay.text(moment().format("dddd, MMMM Do"));
+    if (timeblockHour < hour) {
+        description.classList.add("past");
+    } else if (timeblockHour === hour) {
+        description.classList.add("present");
+    } else {
+        description.classList.add("future");
+    }
+});
 
-// Create timeblocks for standard business hours
-businessHours.forEach(hour => {
-    const timeblock = $("<div>").addClass("timeblock row");
-    const time = $("<div>")
-        .addClass("col-2 hour")
-        .text(`${hour}:00`);
-    const event = $("<textarea>")
-        .addClass("col-9 description")
-        .attr("data-time", hour);
-    const saveBtn = $("<button>")
-        .addClass("col-1 saveBtn")
-        .html("<i class='fas fa-save'></i>");
-    timeblock.append(time, event, saveBtn);
-    container.append(timeblock);
+// Save event to local storage when save button is clicked
+let saveBtns = document.querySelectorAll(".saveBtn");
+
+saveBtns.forEach(saveBtn => {
+    saveBtn.addEventListener("click", function() {
+        let timeblock = this.parentElement;
+        let hour = timeblock.getAttribute("data-hour");
+        let description = timeblock.querySelector(".description").value;
+
+        localStorage.setItem(hour, description);
+    });
+});
+
+// Get events from local storage and display them on the page
+timeblocks.forEach(timeblock => {
+    let hour = timeblock.getAttribute("data-hour");
+    let description = timeblock.querySelector(".description");
+
+    description.value = localStorage.getItem(hour);
 });
